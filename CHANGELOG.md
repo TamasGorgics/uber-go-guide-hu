@@ -1,39 +1,40 @@
 # 2020-06-10
 
-- Add guidance on avoiding `init()`.
-- Add guidance to avoid using built-in names.
-- Add reminder that nil slices are not always the same as empty slices.
+- Új útmutató az `init()` elkerüléséhez.
+- Új útmutató a beépített nevek használatának elkerüléséhez.
+- Új emlékeztető, hogy a nil szeletek (slice) nem mindig ugyan azok, mint az üres szeletek.
 
 # 2020-02-24
 
-- Add guidance on verifying interface compliance with compile-time checks.
+- Új útmutató az interfésznek történő megfelelés ellenőrzéséhez fordítási idejű ellenőrzéssel.
 
 # 2020-01-30
 
-- Recommend using the `time` package when dealing with time.
+- A `time` package használata javasolt, amikor idővel kell dolgozni.
 
 # 2020-01-25
 
-- Add guidance against embedding types in public structs.
+- Új útmutató a publikus struct-okba történő típus beágyazás ellen.
 
 # 2019-12-17
 
+- Functional Options: Az `Option` interfész struct implementációja javasolt az értékek closure-ben történő rögzítése helyett.
 - Functional Options: Recommend struct implementations of `Option` interface
   instead of capturing values with a closure.
 
 # 2019-11-26
 
-- Add guidance against mutating global variables.
+- Új útmutató a globális változók megváltoztatása ellen.
 
 # 2019-10-21
 
-- Add section on remaining consistent with existing practices.
-- Add guidance on map initialization and size hints.
+- Új rész a meglévő gyakorlattal való összhang megőrzéséről.
+- Új útmutató a map adatszerkezet inicializációjához és méret ötletek.
 
 # 2019-10-11
 
-- Suggest succinct context for error messages.
+- Tömör kontextus javaslata a hibaüzenetekhez.
 
 # 2019-10-10
 
-- Initial release.
+- Első kiadás.
