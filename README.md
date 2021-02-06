@@ -52,8 +52,8 @@ row before the </tbody></table> line.
 
 ## Tartalomjegyzék
 
-- [Bevezető](#introduction)
-- [Irányelvek](#guidelines)
+- [Bevezető](#bevezető)
+- [Irányelvek](#irányelvek)
   - [Pointers to Interfaces](#pointers-to-interfaces)
   - [Verify Interface Compliance](#verify-interface-compliance)
   - [Receivers and Interfaces](#receivers-and-interfaces)
@@ -106,7 +106,7 @@ row before the </tbody></table> line.
   - [Functional Options](#functional-options)
 - [Linting](#linting)
 
-## Introduction
+## Bevezető
 
 A stílusok azok az egyezmények, amelyek szabályozzák a kódunkat. A stílus kifejezés kissé téves elnevezés, mivel ezek a konvenciók sokkal többre terjednek ki, mint a forrásfájl formázása - azt a gofmt kezeli számunkra.
 
@@ -123,16 +123,16 @@ Ez a dokumentum azokat a Go kódban szereplő idiomatikus konvenciókat dokument
 1. [Effective Go](https://golang.org/doc/effective_go.html)
 2. [The Go common mistakes guide](https://github.com/golang/go/wiki/CodeReviewComments)
 
-All code should be error-free when run through `golint` and `go vet`. We
-recommend setting up your editor to:
+Minden kódnak hibamentesnek kell lennie, amikor keresztül futtatjuk rajta a `golint` és `go vet` parancsokat. Javasoljuk, hogy állítsd be a fejlesztő
+környezetedben, hogy:
 
-- Run `goimports` on save
-- Run `golint` and `go vet` to check for errors
+- Lefusson a `goimports` mentéskor
+- Fusson `golint` és `go vet` hibaellenőrzés gyanánt
 
-You can find information in editor support for Go tools here:
+Itt találsz információt a Go eszközök támogatásáról különböző fejlesztő környezetekben:
 <https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins>
 
-## Guidelines
+## Irányelvek
 
 ### Pointers to Interfaces
 
