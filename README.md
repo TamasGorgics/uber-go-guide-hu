@@ -54,7 +54,7 @@ row before the </tbody></table> line.
 
 - [Bevezető](#bevezető)
 - [Irányelvek](#irányelvek)
-  - [Pointers to Interfaces](#pointers-to-interfaces)
+  - [Interfészmutatók](#interfészmutatók)
   - [Verify Interface Compliance](#verify-interface-compliance)
   - [Receivers and Interfaces](#receivers-and-interfaces)
   - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
@@ -134,20 +134,16 @@ Itt találsz információt a Go eszközök támogatásáról különböző fejle
 
 ## Irányelvek
 
-### Pointers to Interfaces
+### Interfészmutatók
 
-You almost never need a pointer to an interface. You should be passing
-interfaces as values—the underlying data can still be a pointer.
+Szinte soha nincs szükség interfészmutatókra. Az interfészeket értékként kell átadni - a mögöttük lévő adatok viszont lehetnek mutatók.
 
-An interface is two fields:
+Az interfész két mező:
 
-1. A pointer to some type-specific information. You can think of this as
-  "type."
-2. Data pointer. If the data stored is a pointer, it’s stored directly. If
-  the data stored is a value, then a pointer to the value is stored.
+1. Mutató néhány típus-specifikus információra. Ezt vehetjük típusnak (type).
+2. Adatmutató. Ha a tárolt adat mutató, akkor közvetlenül ez van tárolva. Ha a tárolt adat érték, akkor az érték mutatója van tárolva.
 
-If you want interface methods to modify the underlying data, you must use a
-pointer.
+Ha azt szeretnénk, hogy az interfész metódusai módosítsák a mögötte lévő adatokat, akkor mutatót kell használni.
 
 ### Verify Interface Compliance
 
