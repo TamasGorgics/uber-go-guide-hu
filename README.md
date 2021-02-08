@@ -55,7 +55,7 @@ row before the </tbody></table> line.
 - [Bevezető](#bevezető)
 - [Irányelvek](#irányelvek)
   - [Interfészmutatók](#interfészmutatók)
-  - [Verify Interface Compliance](#verify-interface-compliance)
+  - [Ellenőrizzük az interfésznek való megfelelőséget](#ellenőrizzük-az-interfésznek-való-megfelelőséget)
   - [Receivers and Interfaces](#receivers-and-interfaces)
   - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
   - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
@@ -145,18 +145,16 @@ Az interfész két mező:
 
 Ha azt szeretnénk, hogy az interfész metódusai módosítsák a mögötte lévő adatokat, akkor mutatót kell használni.
 
-### Verify Interface Compliance
+### Ellenőrizzük az interfésznek való megfelelőséget
 
-Verify interface compliance at compile time where appropriate. This includes:
+Fordítási időben ellenőrizzük az interfésznek való megfelelőséget, ahol ez szükséges. Ez magába foglalja:
 
-- Exported types that are required to implement specific interfaces as part of
-  their API contract
-- Exported or unexported types that are part of a collection of types
-  implementing the same interface
-- Other cases where violating an interface would break users
+- Az exportált típusokat, amiknek implementálniuk kell bizonyos interfészeket az API meghatározásuk szerint
+- Az exportált vagy nem exportált típusokat, amelyek az egyazon interfészt implementáló típusok gyűjteményének részét képezik
+- Más eseteket, amikor az interfész megsértése hibát okozna a használónál
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th><th>Helyes</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -195,12 +193,10 @@ func (h *Handler) ServeHTTP(
 </td></tr>
 </tbody></table>
 
-The statement `var _ http.Handler = (*Handler)(nil)` will fail to compile if
-`*Handler` ever stops matching the `http.Handler` interface.
+A `var _ http.Handler = (*Handler)(nil)` utasítás nem fog fordulni, ha a
+`*Handler` valaha is megszűnik illeszkedni a `http.Handler` interfészre.
 
-The right hand side of the assignment should be the zero value of the asserted
-type. This is `nil` for pointer types (like `*Handler`), slices, and maps, and
-an empty struct for struct types.
+A hozzárendelés jobb oldala legyen az állított típus zéró értéke. Ez `nil` a mutatótípusok (például a `*Handler`), a szeletek (slice) és a map típusok esetében, a struct típusok esetében pedig egy üres struct.
 
 ```go
 type LogHandler struct {
