@@ -56,7 +56,7 @@ row before the </tbody></table> line.
 - [Irányelvek](#irányelvek)
   - [Interfészmutatók](#interfészmutatók)
   - [Ellenőrizzük az interfésznek való megfelelőséget](#ellenőrizzük-az-interfésznek-való-megfelelőséget)
-  - [Receivers and Interfaces](#receivers-and-interfaces)
+  - [Fogadók és Interfészek](#fogadók-és-interfészek)
   - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
   - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
   - [Defer to Clean Up](#defer-to-clean-up)
@@ -214,14 +214,14 @@ func (h LogHandler) ServeHTTP(
 }
 ```
 
-### Receivers and Interfaces
+### Fogadók és interfészek
 
-Methods with value receivers can be called on pointers as well as values.
-Methods with pointer receivers can only be called on pointers or [addressable values].
+Metódusok érték fogadókkal hívhatóak mutatókon és értékeken egyaránt.
+Metódusok mutató fogadókkal csak mutatókon vagy [címezhető értékek]en hívhatóak.
 
-  [addressable values]: https://golang.org/ref/spec#Method_values
+  [címezhető értékek]: https://golang.org/ref/spec#Method_values
 
-For example,
+Például,
 
 ```go
 type S struct {
@@ -238,21 +238,20 @@ func (s *S) Write(str string) {
 
 sVals := map[int]S{1: {"A"}}
 
-// You can only call Read using a value
+// Read csak értéken hívható
 sVals[1].Read()
 
-// This will not compile:
+// Ez nem fordul:
 //  sVals[1].Write("test")
 
 sPtrs := map[int]*S{1: {"A"}}
 
-// You can call both Read and Write using a pointer
+// Read és Write egyaránt hívható mutatón
 sPtrs[1].Read()
 sPtrs[1].Write("test")
 ```
 
-Similarly, an interface can be satisfied by a pointer, even if the method has a
-value receiver.
+Hasonlóan, egy interfész kielégíthető egy mutatóval, még akkor is, ha a metódusnak érték fogadója van.
 
 ```go
 type F interface {
@@ -281,9 +280,9 @@ i = s2Ptr
 //   i = s2Val
 ```
 
-Effective Go has a good write up on [Pointers vs. Values].
+Effective Go tartalmaz egy jó leírást a [Mutatók vs. Értékek] témában.
 
-  [Pointers vs. Values]: https://golang.org/doc/effective_go.html#pointers_vs_values
+  [Mutatók vs. Értékek]: https://golang.org/doc/effective_go.html#pointers_vs_values
 
 ### Zero-value Mutexes are Valid
 
