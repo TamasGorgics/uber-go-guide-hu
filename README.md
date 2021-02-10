@@ -57,7 +57,7 @@ row before the </tbody></table> line.
   - [Interfészmutatók](#interfészmutatók)
   - [Ellenőrizzük az interfésznek való megfelelőséget](#ellenőrizzük-az-interfésznek-való-megfelelőséget)
   - [Fogadók és Interfészek](#fogadók-és-interfészek)
-  - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
+  - [A zéró értékű Mutexek érvényesek](#a-zéró-értékű-mutexek-érvényesek)
   - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
   - [Defer to Clean Up](#defer-to-clean-up)
   - [Channel Size is One or None](#channel-size-is-one-or-none)
@@ -284,13 +284,12 @@ Effective Go tartalmaz egy jó leírást a [Mutatók vs. Értékek] témában.
 
   [Mutatók vs. Értékek]: https://golang.org/doc/effective_go.html#pointers_vs_values
 
-### Zero-value Mutexes are Valid
+### A zéró értékű Mutexek érvényesek
 
-The zero-value of `sync.Mutex` and `sync.RWMutex` is valid, so you almost
-never need a pointer to a mutex.
+A `sync.Mutex` és a `sync.RWMutex` zéró értéke is érvényes, így szinte soha nem kell mutató egy mutexhez.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th><th>Helyes</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -309,10 +308,9 @@ mu.Lock()
 </td></tr>
 </tbody></table>
 
-If you use a struct by pointer, then the mutex can be a non-pointer field.
+Ha mutatóként használunk egy struct típust, akkor a mutex lehet egy nem-mutató mező.
 
-Unexported structs that use a mutex to protect fields of the struct may embed
-the mutex.
+Azok a nem exportált structok, amelyek mutexet használnak mezőik védelmére, beágyazhatják a mutexet.
 
 <table>
 <tbody>
@@ -320,7 +318,7 @@ the mutex.
 
 ```go
 type smap struct {
-  sync.Mutex // only for unexported types
+  sync.Mutex // csak nem exportált típusok
 
   data map[string]string
 }
@@ -366,8 +364,8 @@ func (m *SMap) Get(k string) string {
 
 </tr>
 <tr>
-<td>Embed for private types or types that need to implement the Mutex interface.</td>
-<td>For exported types, use a private field.</td>
+<td>Nem exportált típusok vagy olyan típusok esetén, amelyeknek implementálniuk kell a Mutex interfészt, használjunk beágyazott mutexet.</td>
+<td>Exportált típusok esetén használjunk privát mezőt.</td>
 </tr>
 
 </tbody></table>
