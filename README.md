@@ -276,7 +276,7 @@ i = s1Val
 i = s1Ptr
 i = s2Ptr
 
-// The following doesn't compile, since s2Val is a value, and there is no value receiver for f.
+// A következő nem fordul, mivel s2Val egy érték, és f-nek nincs érték fogadója.
 //   i = s2Val
 ```
 
