@@ -58,7 +58,7 @@ row before the </tbody></table> line.
   - [Ellenőrizzük az interfésznek való megfelelőséget](#ellenőrizzük-az-interfésznek-való-megfelelőséget)
   - [Fogadók és Interfészek](#fogadók-és-interfészek)
   - [A zéró értékű Mutexek érvényesek](#a-zéró-értékű-mutexek-érvényesek)
-  - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
+  - [Szeletek és Map típusok másolása határoknál](#szeletek-és-map-típusok-másolása-határoknál)
   - [Defer to Clean Up](#defer-to-clean-up)
   - [Channel Size is One or None](#channel-size-is-one-or-none)
   - [Start Enums at One](#start-enums-at-one)
@@ -370,10 +370,9 @@ func (m *SMap) Get(k string) string {
 
 </tbody></table>
 
-### Copy Slices and Maps at Boundaries
+### Szeletek és Map típusok másolása határoknál
 
-Slices and maps contain pointers to the underlying data so be wary of scenarios
-when they need to be copied.
+A szeletek (slice) és map típusok a mögöttük lévő adatokat mutatókkal tárolják, ezért vigyázni kell, amikor ezeket kell másolni.
 
 #### Receiving Slices and Maps
 
