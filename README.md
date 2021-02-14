@@ -374,13 +374,12 @@ func (m *SMap) Get(k string) string {
 
 A szeletek (slice) és map típusok a mögöttük lévő adatokat mutatókkal tárolják, ezért vigyázni kell, amikor ezeket kell másolni.
 
-#### Receiving Slices and Maps
+#### Szeletek és map-ek fogadása
 
-Keep in mind that users can modify a map or slice you received as an argument
-if you store a reference to it.
+Ne feledjük, hogy a felhasználó módosíthatja az argumentumként kapott map-et vagy szeletet, ha tárolunk hozzá referenciát.
 
 <table>
-<thead><tr><th>Bad</th> <th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th> <th>Helyes</th></tr></thead>
 <tbody>
 <tr>
 <td>
@@ -393,7 +392,7 @@ func (d *Driver) SetTrips(trips []Trip) {
 trips := ...
 d1.SetTrips(trips)
 
-// Did you mean to modify d1.trips?
+// A d1.trips-et akartad módosítani?
 trips[0] = ...
 ```
 
@@ -409,7 +408,7 @@ func (d *Driver) SetTrips(trips []Trip) {
 trips := ...
 d1.SetTrips(trips)
 
-// We can now modify trips[0] without affecting d1.trips.
+// Most már módosíthatjuk a trips[0]-t a d1.trips megváltotatása nélkül.
 trips[0] = ...
 ```
 
@@ -419,7 +418,7 @@ trips[0] = ...
 </tbody>
 </table>
 
-#### Returning Slices and Maps
+#### Szeletek és map-ek vissza adása
 
 Similarly, be wary of user modifications to maps or slices exposing internal
 state.
