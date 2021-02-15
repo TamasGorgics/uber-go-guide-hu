@@ -418,13 +418,12 @@ trips[0] = ...
 </tbody>
 </table>
 
-#### Szeletek és map-ek vissza adása
+#### Szeletek és map-ek visszaadása
 
-Similarly, be wary of user modifications to maps or slices exposing internal
-state.
+Hasonlóképpen, ügyeljünk a belső állapotot feltáró map-ek vagy szeletek felhasználói módosítására.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th><th>Helyes</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -434,7 +433,7 @@ type Stats struct {
   counters map[string]int
 }
 
-// Snapshot returns the current stats.
+// A Snapshot metódus az aktuális értékeket adja vissza.
 func (s *Stats) Snapshot() map[string]int {
   s.mu.Lock()
   defer s.mu.Unlock()
@@ -442,8 +441,8 @@ func (s *Stats) Snapshot() map[string]int {
   return s.counters
 }
 
-// snapshot is no longer protected by the mutex, so any
-// access to the snapshot is subject to data races.
+// snapshot már nincs védve a mutex által, így bármely hozzáférés
+// a snapshot-hoz versenyhelyzetet (data race) teremthet
 snapshot := stats.Snapshot()
 ```
 
@@ -466,7 +465,7 @@ func (s *Stats) Snapshot() map[string]int {
   return result
 }
 
-// Snapshot is now a copy.
+// Snapshot most egy másolat.
 snapshot := stats.Snapshot()
 ```
 
