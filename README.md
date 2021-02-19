@@ -59,7 +59,7 @@ row before the </tbody></table> line.
   - [Fogadók és Interfészek](#fogadók-és-interfészek)
   - [A zéró értékű Mutexek érvényesek](#a-zéró-értékű-mutexek-érvényesek)
   - [Szeletek és Map típusok másolása határoknál](#szeletek-és-map-típusok-másolása-határoknál)
-  - [Defer to Clean Up](#defer-to-clean-up)
+  - [Defer a takarításhoz](#defer-a-takarításhoz)
   - [Channel Size is One or None](#channel-size-is-one-or-none)
   - [Start Enums at One](#start-enums-at-one)
   - [Use `"time"` to handle time](#use-time-to-handle-time)
@@ -472,12 +472,12 @@ snapshot := stats.Snapshot()
 </td></tr>
 </tbody></table>
 
-### Defer to Clean Up
+### Defer a takarításhoz
 
-Use defer to clean up resources such as files and locks.
+Használjuk a defer kulcsszót olyan erőforrások feltakarításához, mint a fájlok és zárak (lock).
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th><th>Helyes</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -494,7 +494,7 @@ p.Unlock()
 
 return newCount
 
-// easy to miss unlocks due to multiple returns
+// könnyen kimaradhat a zár feloldása a több return miatt
 ```
 
 </td><td>
@@ -510,17 +510,17 @@ if p.count < 10 {
 p.count++
 return p.count
 
-// more readable
+// könnyebben olvasható
 ```
 
 </td></tr>
 </tbody></table>
 
-Defer has an extremely small overhead and should be avoided only if you can
-prove that your function execution time is in the order of nanoseconds. The
-readability win of using defers is worth the miniscule cost of using them. This
-is especially true for larger methods that have more than simple memory
-accesses, where the other computations are more significant than the `defer`.
+A defern-nek szélsőségesen alacsony a költsége és csak akkor lehet elkerülni, ha
+a funkció végrehajtási ideje bizonyíthatóan nanoszekundum nagyságrendű. Az olvashatóságban
+megnyilvánuló előnye miatt a defer használata megéri ezt a minimális költséget.
+Ez különösen igaz nagyobb metódusoknál, amiknek több, mint egyszerű memória hozzáférésük van,
+ahol az egyéb számítások jelentősebbek, mint a `defer`.
 
 ### Channel Size is One or None
 
