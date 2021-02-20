@@ -60,7 +60,7 @@ row before the </tbody></table> line.
   - [A zéró értékű Mutexek érvényesek](#a-zéró-értékű-mutexek-érvényesek)
   - [Szeletek és Map típusok másolása határoknál](#szeletek-és-map-típusok-másolása-határoknál)
   - [Defer a takarításhoz](#defer-a-takarításhoz)
-  - [Channel Size is One or None](#channel-size-is-one-or-none)
+  - [A csatorna mérete egy vagy semmi](#a-csatorna-mérete-egy-vagy-semmi)
   - [Start Enums at One](#start-enums-at-one)
   - [Use `"time"` to handle time](#use-time-to-handle-time)
   - [Error Types](#error-types)
@@ -516,36 +516,36 @@ return p.count
 </td></tr>
 </tbody></table>
 
-A defern-nek szélsőségesen alacsony a költsége és csak akkor lehet elkerülni, ha
+A defer-nek szélsőségesen alacsony a költsége és csak akkor lehet elkerülni, ha
 a funkció végrehajtási ideje bizonyíthatóan nanoszekundum nagyságrendű. Az olvashatóságban
 megnyilvánuló előnye miatt a defer használata megéri ezt a minimális költséget.
 Ez különösen igaz nagyobb metódusoknál, amiknek több, mint egyszerű memória hozzáférésük van,
 ahol az egyéb számítások jelentősebbek, mint a `defer`.
 
-### Channel Size is One or None
+### A csatorna mérete egy vagy semmi
 
-Channels should usually have a size of one or be unbuffered. By default,
-channels are unbuffered and have a size of zero. Any other size
-must be subject to a high level of scrutiny. Consider how the size is
-determined, what prevents the channel from filling up under load and blocking
-writers, and what happens when this occurs.
+A csatornák (channel) méretének általában egynek kell lenniük, vagy puffer nélkülieknek kell lenniük.
+Alapértelmezés szerint a csatornák puffer nélküliek és nulla méretűek.
+Minden más méretet magas szintű ellenőrzésnek kell alávetni. Alaposan meg kell fontolni, hogy
+hogyan határozzuk meg a méretet, mi akadályozza meg, hogy megteljen a csatorna terhelés alatt
+és ez által az írók blokkolásra kerüljenek, illetve, hogy mi történik, amikor ez bekövetkezik.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th><th>Helyes</th></tr></thead>
 <tbody>
 <tr><td>
 
 ```go
-// Ought to be enough for anybody!
+// Mindenkinek elégnek kell lennie!
 c := make(chan int, 64)
 ```
 
 </td><td>
 
 ```go
-// Size of one
+// Egy méretű
 c := make(chan int, 1) // or
-// Unbuffered channel, size of zero
+// Puffer nélküli csatorna, nulla méretű
 c := make(chan int)
 ```
 
