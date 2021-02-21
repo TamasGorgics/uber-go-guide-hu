@@ -61,7 +61,7 @@ row before the </tbody></table> line.
   - [Szeletek és Map típusok másolása határoknál](#szeletek-és-map-típusok-másolása-határoknál)
   - [Defer a takarításhoz](#defer-a-takarításhoz)
   - [A csatorna mérete egy vagy semmi](#a-csatorna-mérete-egy-vagy-semmi)
-  - [Start Enums at One](#start-enums-at-one)
+  - [A felsorolásokat egyel kezdjük](#a-felsorolásokat-egyel-kezdjük)
   - [Use `"time"` to handle time](#use-time-to-handle-time)
   - [Error Types](#error-types)
   - [Error Wrapping](#error-wrapping)
@@ -552,14 +552,13 @@ c := make(chan int)
 </td></tr>
 </tbody></table>
 
-### Start Enums at One
-
-The standard way of introducing enumerations in Go is to declare a custom type
-and a `const` group with `iota`. Since variables have a 0 default value, you
-should usually start your enums on a non-zero value.
+### A felsorolásokat egyel kezdjük
+A felsorolások (enum) bevezetésének szokásos módja a Go-ban az, hogy deklarálunk egy
+egyéni típust és egy `const` csoportot `iota`-val. Mivel a változók alapértelmezett
+értéke 0, az enumokat általában nem nulla értéken kell kezdeni.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Helytelen</th><th>Helyes</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -592,8 +591,8 @@ const (
 </td></tr>
 </tbody></table>
 
-There are cases where using the zero value makes sense, for example when the
-zero value case is the desirable default behavior.
+Vannak esetek, amikor a nulla érték használatának van értelme, például
+amikor a nulla érték esete a kívánt alapértelmezett viselkedés.
 
 ```go
 type LogOutput int
