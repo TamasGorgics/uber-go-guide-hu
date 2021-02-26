@@ -62,7 +62,7 @@ row before the </tbody></table> line.
   - [Defer a takarításhoz](#defer-a-takarításhoz)
   - [A csatorna mérete egy vagy semmi](#a-csatorna-mérete-egy-vagy-semmi)
   - [A felsorolásokat egyel kezdjük](#a-felsorolásokat-egyel-kezdjük)
-  - [Use `"time"` to handle time](#use-time-to-handle-time)
+  - [Az idő kezelésére használjuk a `"time"` könyvtárat](#az-idő-kezelésére-használjuk-a-time-könyvtárat)
   - [Error Types](#error-types)
   - [Error Wrapping](#error-wrapping)
   - [Handle Type Assertion Failures](#handle-type-assertion-failures)
@@ -606,22 +606,21 @@ const (
 // LogToStdout=0, LogToFile=1, LogToRemote=2
 ```
 
-### Use `"time"` to handle time
+### Az idő kezelésére használjuk a `"time"` könyvtárat
 
-Time is complicated. Incorrect assumptions often made about time include the
-following.
+Az idő komplikált. Az idővel kapcsolatos gyakori téves feltételezések a következők.
 
-1. A day has 24 hours
-2. An hour has 60 minutes
-3. A week has 7 days
-4. A year has 365 days
-5. [And a lot more](https://infiniteundo.com/post/25326999628/falsehoods-programmers-believe-about-time)
+1. A nap 24 órából áll
+2. Egy óra 60 perc
+3. A hétnek 7 napja van
+4. Az évnek 365 napja van
+5. [És sok más](https://infiniteundo.com/post/25326999628/falsehoods-programmers-believe-about-time)
 
-For example, *1* means that adding 24 hours to a time instant will not always
-yield a new calendar day.
+Például, *1* azt jelenti, hogy hogy egy adott pillanathoz (instant) 24 órát
+hozzáadva nem feltétlenül kapunk egy új naptári napot.
 
-Therefore, always use the [`"time"`] package when dealing with time because it
-helps deal with these incorrect assumptions in a safer, more accurate manner.
+Ezért hát minding használjuk a [`"time"`] csomagot ha idővel van dolgunk, mert
+ez segít biztonságosan és pontosan lekezelni ezeket a téves feltételezéseket.
 
   [`"time"`]: https://golang.org/pkg/time/
 
